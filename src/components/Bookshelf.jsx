@@ -8,14 +8,19 @@ const Bookshelf = () => {
         { title: 'Things Fall Apart', author: 'Chinua Achebe' },
       ]);
 
+// <---- Create Event handlers ====> 
+
+    const handleInputChange = (event) => { 
+        setNewBook({...books, [event.target.name]: event.target.value})
+    
+      }
+    
 
 
 
 
 
 
-
-      
    // Bookshelf Component   
 return ()
 <>
