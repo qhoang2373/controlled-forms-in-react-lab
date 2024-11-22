@@ -8,17 +8,24 @@ const Bookshelf = () => {
         { title: 'Things Fall Apart', author: 'Chinua Achebe' },
       ]);
 
+      const [newBook, setNewBook] = useState([
+        {
+            title: '',
+            author: '',
+        }
+    ])
+
 // <---- Create Event handlers ====> 
 
     {/*handle Input Change function*/}
-    const handleInputChange = (event) => { 
-        setNewBook({...books, [event.target.name]: event.target.value})
-      }
+    const handleInputChange = (event) => {
+      setNewBook({ ...newBook, [event.target.name]: event.target.value });
+  };
     
 {/*handle submit function*/}
       const handleSubmit = (event) => {
         event.preventDefault()
-        setBooks({...books})
+        setBooks([...books, newBook]);
         setNewBook({
             title: "",
             author: ""
@@ -29,7 +36,7 @@ const Bookshelf = () => {
 // <---- Form Creation ====> 
 
    // Bookshelf Component   
-return ()
+return (
 <>
 <div className="bookshelfDiv">
   <div className="formDiv">
@@ -43,16 +50,16 @@ return ()
     value={newBook.title} 
     onChange={handleInputChange}
     ></input>
-{/* TitleInput Field, inputs will allow users to enter the details for the book they want to add to the shelf.*/}
+
     
     <label htmlFor="author">Author: </label>
     <input 
      id="author"
      name="author" 
      value={newBook.author}
-     onChange={handleInput}
+     onChange={handleInputChange}
      ></input>
-{/* Author Input Field, inputs will allow users to enter the details for the book they want to add to the shelf.*/}
+
         
 <button type="submit">Add New Book</button>
      </form>
@@ -60,9 +67,16 @@ return ()
 
   <div className="bookCardsDiv">
   {books.map((book, index) => (
+      <div key={index}>
+      <h3>{book.title}</h3>
+      <p>{book.author}</p>
     
-    
+        </div>
+      ))}
+      </div>
     </div>
-</div>
-</>
+      </>
+    )
+}
 
+export default Bookshelf;
